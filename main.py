@@ -13,10 +13,10 @@ def job():
 
     print("Задача завершена!")
 
-schedule.every(1).hour.do(job)
+schedule.every(1).minute.do(job)
 
 if __name__ == "__main__":
-    print("Система готова к работе. Задачи будут выполняться через каждый час.")
+    print("Система готова к работе. Задачи будут выполняться через каждую минуту.")
     while True:
         schedule.run_pending()
         time.sleep(60)

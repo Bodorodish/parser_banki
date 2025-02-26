@@ -24,8 +24,10 @@ companies = {
 }
 
 def parse_reviews():
+    max_pages = 5
+
     if os.path.exists('Отзывы.xlsx'):
-        existing_df = pd.read_excel('Отзывы.xlsx', parse_dates=['Время'])
+        existing_df = pd.read_excel('Отзывы.xlsx', parse_dates=['Время'], engine='openpyxl')
         existing_urls = set(existing_df['url жалобы'].dropna())
     else:
         existing_df = pd.DataFrame(columns=[
@@ -40,7 +42,8 @@ def parse_reviews():
         page = 1
         stop_parsing = False
         
-        while not stop_parsing:
+        while not stop_parsing and page <= max_pages:
+            print(page)
             url = urljoin(base_url, company_config['url'])
             if page > 1:
                 url = urljoin(url, f'?page={page}')
